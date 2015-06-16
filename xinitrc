@@ -30,6 +30,9 @@ xset -b
 # Fix keyboard layout
 setxkbmap -layout no
 
+# Fix colors
+xcalib -d :0 -s 0 -v ~/.color/GCM-LENOVO-6464Y1H\(2010-05-06\).icc
+
 # Fix some trackpoint settings
 xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 8 1
 xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 8 2
