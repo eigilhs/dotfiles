@@ -1,0 +1,53 @@
+#!/bin/sh
+# $Xorg: xinitrc.cpp,v 1.3 2000/08/17 19:54:30 cpqbld Exp $
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    /usr/bin/xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+    /usr/bin/xmodmap $sysmodmap
+fi
+
+if [ -f $userresources ]; then
+    /usr/bin/xrdb -merge $userresources
+fi
+
+if [ -f $usermodmap ]; then
+    /usr/bin/xmodmap $usermodmap
+fi
+
+# Turn off bell
+xset -b
+
+# Fix keyboard layout
+setxkbmap -layout no
+
+# Fix some trackpoint settings
+xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 8 1
+xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 8 2
+xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
+
+# Disable touchpad
+xinput set-prop 11 "Device Enabled" 0
+
+# Set up the screens
+xrandr --output LVDS1 --mode 1280x800 --pos 0x0
+xrandr --output VGA1 --mode 1280x1024 --pos 1280x0
+
+#synclient TouchpadOff=1
+#xscreensaver -no-splash &
+
+# Start screenlocker
+xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
+
+#exec /usr/bin/xterm -geometry 80x66+0+0
+conky | while read -r cky; do xsetroot -name "$cky"; done &
+exec dwm
