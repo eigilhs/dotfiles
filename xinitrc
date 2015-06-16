@@ -45,12 +45,8 @@ xinput set-prop 11 "Device Enabled" 0
 xrandr --output LVDS1 --mode 1280x800 --pos 0x0
 xrandr --output VGA1 --mode 1280x1024 --pos 1280x0
 
-#synclient TouchpadOff=1
-#xscreensaver -no-splash &
-
 # Start screenlocker
 xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
 
-#exec /usr/bin/xterm -geometry 80x66+0+0
 conky | while read -r cky; do xsetroot -name "$cky"; done &
 exec dwm
