@@ -110,7 +110,7 @@ URxvt.keysym.C-M-k:    perl:font-size:increase
 URxvt.keysym.C-M-j:    perl:font-size:decrease
 
 URxvt.keysym.M-u:      perl:url-select:select_next
-URxvt.url-select.launcher: chromium
+URxvt.url-select.launcher: x-www-browser
 URxvt.url-select.underline: true
 
 URxvt.keysym.C-S-c:    perl:clipboard:copy
