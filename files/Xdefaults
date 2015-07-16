@@ -1,0 +1,130 @@
+! font settings --------------------------------------------------------------
+
+Xft.autohint: true
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: hintslight
+!Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+! unicode-rxvt ---------------------------------------------------------------
+
+
+!URxvt.termName:  xterm
+
+! **  colors  **
+!  ** ------ **
+
+! --------------------------+-------------------------- !
+!          Normal           |          Bright           !
+! ----------+---------------+------------+------------- !
+! Shorthand | rgb.txt name  |  Shorthand | rgb.txt name !
+! ----------+---------------+------------+------------- !
+! color0    | Black         |  color8    | Grey25       !
+! color1    | Red3          |  color9    | Red          !
+! color2    | Green3        |  color10   | Green        !
+! color3    | Yellow3       |  color11   | Yellow       !
+! color4    | Blue3         |  color12   | Blue         !
+! color5    | Magenta3      |  color13   | Magenta      !
+! color6    | Cyan3         |  color14   | Cyan         !
+! color7    | AntiqueWhite  |  color15   | White        !
+! ----------+---------------+------------+------------- !
+
+! black (202020?)
+URxvt.color0:	#272822
+URxvt.color8:	#666666
+! red
+URxvt.color1:	#AA3A2E
+URxvt.color9:	#FA5748
+! green
+URxvt.color2:	#48A12B
+URxvt.color10:	#A3D724
+! yellow
+URxvt.color3:	#B27D12
+URxvt.color11:	#DDB62B
+! blue
+URxvt.color4:	#156CAB
+URxvt.color12:	#55B3E6
+! magenta
+URxvt.color5:	#A41F99
+URxvt.color13:	#FE87F4
+! cyan
+URxvt.color6:	#359C8B
+URxvt.color14:	#75F3E6
+! white
+URxvt.color7:	#77858C
+URxvt.color15:	#C0C0C0
+
+URxvt.foreground:           #F8F8F2
+URxvt.background:           #272822
+URxvt.cursorColor:          #F8F8F2
+
+URxvt.depth:                256
+
+! **  misc  **
+!  ** ---- **
+
+!URxvt.geometry:             80x25
+!URxvt.borderLess:           true
+URxvt.externalBorder:       0
+URxvt.internalBorder:       0
+
+! fonts
+! run "fc-list" for a list of available fonts
+URxvt.font:                 xft:Monospace:pixelsize=14
+!URxvt.boldfont:             xft:UbuntuMono-B:pixelsize=14
+!URxvt.italicfont:           xft:UbuntuMono-RI:pixelsize=14
+!URxvt.boldItalicfont:       xft:UbuntuMono-BI:pixelsize=14
+URxvt.letterSpace:          -1
+
+URxvt.visualBell:           False
+URxvt.pointerBlank:         True
+URxvt.cursorBlink:          True
+URxvt.cursorUnderline:      False
+
+URxvt.scrollBar:            False
+URxvt.scrollTtyOutput:      False
+URxvt.scrollTtyKeypress:    True
+URxvt.secondaryScroll:      True
+URxvt.mouseWheelScrollPage: True
+URxvt.saveLines:            8000
+
+URxvt.iso14755:             False
+URxvt.iso14755_52:          False
+
+URxvt.perl-lib:             /usr/lib/urxvt/perl/
+URxvt.perl-ext-common :     default,fullscreen,font-size,clipboard,url-select
+
+URxvt.altSendsEscape:       True
+
+! clickable links
+!URxvt.urlLauncher     :     chromium
+!URxvt.matcher.button  :     1
+URxvt*underlineColor  :     orange
+
+! **  keybindings  **
+!  ** ----------- **
+
+URxvt.keysym.C-M-k:    perl:font-size:increase
+URxvt.keysym.C-M-j:    perl:font-size:decrease
+
+URxvt.keysym.M-u:      perl:url-select:select_next
+URxvt.url-select.launcher: chromium
+URxvt.url-select.underline: true
+
+URxvt.keysym.C-S-c:    perl:clipboard:copy
+URxvt.keysym.C-S-v:    perl:clipboard:paste
+URxvt.keysym.C-M-S-v:  perl:clipboard:paste_escaped
+
+URxvt.keysym.F11:      perl:fullscreen:switch
+
+URxvt.keysym.M-Down:   \033[1;3B
+URxvt.keysym.M-Up:     \033[1;3A
+URxvt.keysym.M-Left:   \033[1;3D
+URxvt.keysym.M-Right:  \033[1;3C
+URxvt.keysym.C-Up:     \033[1;5A
+URxvt.keysym.C-Down:   \033[1;5B
+URxvt.keysym.C-Left:   \033[1;5D
+URxvt.keysym.C-Right:  \033[1;5C
+!URxvt.keysym.C-BackSpace:  
