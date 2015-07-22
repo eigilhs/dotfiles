@@ -48,5 +48,5 @@ xrandr --output VGA1 --mode 1280x1024 --pos 1280x0
 # Start screenlocker
 xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
 
-conky | while read -r cky; do xsetroot -name "$cky"; done &
+(conkylite | while read LINE; do xsetroot -name "$LINE"; done) &
 exec dwm

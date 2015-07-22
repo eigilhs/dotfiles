@@ -4,7 +4,6 @@ Xft.autohint: true
 Xft.antialias: true
 Xft.hinting: true
 Xft.hintstyle: hintslight
-!Xft.dpi: 96
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
 
@@ -41,8 +40,8 @@ URxvt.color9:	#FA5748
 URxvt.color2:	#48A12B
 URxvt.color10:	#A3D724
 ! yellow
-URxvt.color3:	#B27D12
-URxvt.color11:	#DDB62B
+URxvt.color3:	#A29D12
+URxvt.color11:	#DDD62B
 ! blue
 URxvt.color4:	#156CAB
 URxvt.color12:	#55B3E6
@@ -60,22 +59,17 @@ URxvt.foreground:           #F8F8F2
 URxvt.background:           #272822
 URxvt.cursorColor:          #F8F8F2
 
-URxvt.depth:                256
+URxvt.depth:                32
 
 ! **  misc  **
 !  ** ---- **
 
-!URxvt.geometry:             80x25
-!URxvt.borderLess:           true
 URxvt.externalBorder:       0
 URxvt.internalBorder:       0
 
 ! fonts
 ! run "fc-list" for a list of available fonts
-URxvt.font:                 xft:Monospace:pixelsize=14
-!URxvt.boldfont:             xft:UbuntuMono-B:pixelsize=14
-!URxvt.italicfont:           xft:UbuntuMono-RI:pixelsize=14
-!URxvt.boldItalicfont:       xft:UbuntuMono-BI:pixelsize=14
+URxvt.font:                 xft:Monospace:pixelsize=16
 URxvt.letterSpace:          -1
 
 URxvt.visualBell:           False
@@ -86,7 +80,8 @@ URxvt.cursorUnderline:      False
 URxvt.scrollBar:            False
 URxvt.scrollTtyOutput:      False
 URxvt.scrollTtyKeypress:    True
-URxvt.secondaryScroll:      True
+URxvt.secondaryScreen:      True
+URxvt.secondaryScroll:      False
 URxvt.mouseWheelScrollPage: True
 URxvt.saveLines:            8000
 
@@ -94,13 +89,11 @@ URxvt.iso14755:             False
 URxvt.iso14755_52:          False
 
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
-URxvt.perl-ext-common :     default,fullscreen,font-size,clipboard,url-select
+URxvt.perl-ext-common :     default,url-select
 
 URxvt.altSendsEscape:       True
 
-! clickable links
-!URxvt.urlLauncher     :     chromium
-!URxvt.matcher.button  :     1
+! links
 URxvt*underlineColor  :     orange
 
 ! **  keybindings  **
@@ -112,19 +105,3 @@ URxvt.keysym.C-M-j:    perl:font-size:decrease
 URxvt.keysym.M-u:      perl:url-select:select_next
 URxvt.url-select.launcher: x-www-browser
 URxvt.url-select.underline: true
-
-URxvt.keysym.C-S-c:    perl:clipboard:copy
-URxvt.keysym.C-S-v:    perl:clipboard:paste
-URxvt.keysym.C-M-S-v:  perl:clipboard:paste_escaped
-
-URxvt.keysym.F11:      perl:fullscreen:switch
-
-URxvt.keysym.M-Down:   \033[1;3B
-URxvt.keysym.M-Up:     \033[1;3A
-URxvt.keysym.M-Left:   \033[1;3D
-URxvt.keysym.M-Right:  \033[1;3C
-URxvt.keysym.C-Up:     \033[1;5A
-URxvt.keysym.C-Down:   \033[1;5B
-URxvt.keysym.C-Left:   \033[1;5D
-URxvt.keysym.C-Right:  \033[1;5C
-!URxvt.keysym.C-BackSpace:  
