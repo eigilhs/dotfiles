@@ -28,7 +28,7 @@ fi
 xset -b
 
 # Fix keyboard layout
-setxkbmap -layout no
+setxkbmap -layout no -option ctrl:nocaps
 
 # Fix colors
 xcalib -d :0 -s 0 -v ~/.color/GCM-LENOVO-6464Y1H\(2010-05-06\).icc
@@ -48,5 +48,6 @@ xrandr --output VGA1 --mode 1280x1024 --pos 1280x0
 # Start screenlocker
 xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
 
+emacs --daemon
 dwmstatus &
-exec dwm
+exec ck-launch-session dbus-launch dwm
