@@ -1,7 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-iso10646-*";
+static const char *fonts[] = {
+    "DejaVu Sans Mono:size=10.5",
+    "Sans:size=10.5",
+    "VL Gothic:size=10.5",
+    "WenQuanYi Micro Hei:size=10.5",
+};
+static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-iso10646-*";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#272822";
 static const char normfgcolor[]     = "#D8D8D2";
@@ -17,9 +23,13 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
+	/* xprop(1):
+	 *	WM_CLASS(STRING) = instance, class
+	 *	WM_NAME(STRING) = title
+	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",       NULL,       NULL,       0,            True,        -1 },
-	{ "Chromium",   NULL,       NULL,       1 << 8,       False,       -1 },
+	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
+	{ "Chromium", NULL,       NULL,       1 << 8,       False,       -1 },
 };
 
 /* layout(s) */
@@ -46,7 +56,8 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
 static const char *webcmd[]  = { "x-www-browser", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
