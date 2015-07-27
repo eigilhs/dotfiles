@@ -165,6 +165,7 @@
 
 (set-frame-size-according-to-resolution)
 (global-set-key (kbd "S-<f9>") 'backward-kill-word)
+(global-set-key (kbd "<f6>") 'smex)
 (global-set-key "\M-[1;5C" 'forward-word)
 (global-set-key "\M-[1;5D" 'backward-word)
 (global-set-key "\M-[1;5A" 'backward-paragraph)

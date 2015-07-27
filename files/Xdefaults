@@ -99,6 +99,8 @@ URxvt*underlineColor  :     orange
 ! **  keybindings  **
 !  ** ----------- **
 
+URxvt.keysym.C-BackSpace: \033[33~
+
 URxvt.keysym.C-M-k:    perl:font-size:increase
 URxvt.keysym.C-M-j:    perl:font-size:decrease
 
