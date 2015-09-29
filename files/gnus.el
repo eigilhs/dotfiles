@@ -1,4 +1,4 @@
-(setq user-mail-address "eigilhs@math.uio.no" 
+(setq user-mail-address "eigilhs@ifi.uio.no"
       user-full-name "Eigil Skjæveland")
 
 (require 'nnir)
@@ -33,8 +33,8 @@
 ;; For BCC-ing myself
 (setq gnus-posting-styles
       '((".*"
-	 ("BCC" "eigilhs@math.uio.no")
-         (address "eigilhs@math.uio.no"))))
+	 ("BCC" "eigilhs@ifi.uio.no")
+         (address "eigilhs@ifi.uio.no"))))
 
 ;; For nice display of threads
 (when window-system

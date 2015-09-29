@@ -95,3 +95,6 @@ fi
 
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'

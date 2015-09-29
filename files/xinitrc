@@ -48,6 +48,9 @@ xrandr --output VGA1 --mode 1280x1024 --pos 1280x0
 # Start screenlocker
 xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
 
+# Kill stupid bluetooth
+echo disable > /proc/acpi/ibm/bluetooth
+
 emacs --daemon
 dwmstatus &
 exec ck-launch-session dbus-launch dwm
