@@ -16,3 +16,8 @@ alias fana='echo level auto | sudo tee /proc/acpi/ibm/fan'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias vga='xrandr --output VGA1 --auto --pos 1280x0'
+alias vgaoff='xrandr --output VGA1 --off'
+alias mirror='xrandr --output VGA1 --auto --same-as LVDS1'
+#alias panning='xrandr --output VGA1 --auto --output LVDS1 \
+#--output LVDS1 --mode 1920x1080 --fb 1920x1080 --panning 1920x1080* --output HDMI1 --mode 1920x1080 --same-as LVDS1'

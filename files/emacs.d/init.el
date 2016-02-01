@@ -118,22 +118,21 @@
 (setq fci-rule-column 72)
 
 (add-to-list 'load-path "~/.emacs.d/plugins/")
-(require 'ido)
-(ido-mode t)
+;; (require 'ido)
+;; (ido-mode t)
 
-(autoload 'notmuch "notmuch" "notmuch mail" t)
 (require 'undoc)
 (require 'package)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "<menu>") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; (smex-initialize)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "<menu>") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (load-theme 'monokai t)
 
 (require 'multiple-cursors)
@@ -165,12 +164,19 @@
 
 (set-frame-size-according-to-resolution)
 (global-set-key (kbd "S-<f9>") 'backward-kill-word)
-(global-set-key (kbd "<f6>") 'smex)
+;; (global-set-key (kbd "<f6>") 'smex)
 (global-set-key "\M-[1;5C" 'forward-word)
 (global-set-key "\M-[1;5D" 'backward-word)
 (global-set-key "\M-[1;5A" 'backward-paragraph)
 (global-set-key "\M-[1;5B" 'forward-paragraph)
 ;(global-set-key "\M-H[3~" 'forward-paragraph)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(setq asm-comment-char ?\#)
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60
+                      64 68 72 76 80 84 88 92 96 100 104 108 112
+                      116 120))
 
 ;; simple regexp used to check the message. Tweak to your own need.
 ;; (defvar my-message-attachment-regexp "\\([Ww]e send\\|[Ii] send\\|attach\\)")
