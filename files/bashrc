@@ -98,3 +98,5 @@ export EDITOR="emacsclient -t"
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+
+export PATH=~/.rakudobrew/bin:$PATH
