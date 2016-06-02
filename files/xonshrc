@@ -1,0 +1,14 @@
+$XONSH_COLOR_STYLE = 'monokai'
+
+def return_code_string():
+    rc = 0
+    if __xonsh_history__.rtns:
+        rc = __xonsh_history__.rtns[-1]
+    if rc:
+        return '{BOLD_INTENSE_RED}%d{NO_COLOR}' % rc
+    else:
+        return '{BOLD_INTENSE_GREEN}%d{NO_COLOR}' % rc
+
+$FORMATTER_DICT['rc'] = return_code_string
+$FORMATTER_DICT['time'] = lambda: $(date +%R)[:-1]
+$PROMPT = '{env_name}{time} {rc} {cwd}{branch_color}{curr_branch}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} '
