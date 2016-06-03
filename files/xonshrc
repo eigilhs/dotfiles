@@ -9,6 +9,13 @@ def return_code_string():
     else:
         return '{BOLD_INTENSE_GREEN}%d{NO_COLOR}' % rc
 
+$EDITOR = 'emacsclient -t'
 $FORMATTER_DICT['rc'] = return_code_string
 $FORMATTER_DICT['time'] = lambda: $(date +%R)[:-1]
 $PROMPT = '{env_name}{time} {rc} {cwd}{branch_color}{curr_branch}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} '
+
+def _upgrade(args, stdin=None):
+    if ![sudo apt-get update].rtn == 0:
+        sudo apt-get dist-upgrade
+
+aliases['up'] = _upgrade
