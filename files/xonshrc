@@ -1,21 +1,31 @@
-$XONSH_COLOR_STYLE = 'monokai'
-
 def return_code_string():
     rc = 0
     if __xonsh_history__.rtns:
         rc = __xonsh_history__.rtns[-1]
-    if rc:
-        return '{BOLD_INTENSE_RED}%d{NO_COLOR}' % rc
-    else:
-        return '{BOLD_INTENSE_GREEN}%d{NO_COLOR}' % rc
+    s = '{BOLD_INTENSE_%%s}%d{NO_COLOR}' % rc
+    return s % ('RED' if rc else 'GREEN')
 
+$XONSH_COLOR_STYLE = 'monokai'
 $EDITOR = 'emacsclient -t'
 $FORMATTER_DICT['rc'] = return_code_string
 $FORMATTER_DICT['time'] = lambda: $(date +%R)[:-1]
-$PROMPT = '{env_name}{time} {rc} {cwd}{branch_color}{curr_branch}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} '
+$PROMPT = ('{env_name}{time} {rc} {cwd}'
+           '{branch_color}{curr_branch}{NO_COLOR} '
+           '{BOLD_WHITE}{prompt_end}{NO_COLOR} ')
+$PATH.append('/home/eigil/build/Nim/bin')
+$PATH.append('/home/eigil/.nimble/bin')
 
+# ======= Aliases =======
 def _upgrade(args, stdin=None):
     if ![sudo apt-get update].rtn == 0:
         sudo apt-get dist-upgrade
 
+_fan_level = 0
+def _fan_control(args, stdin=None):
+    global _fan_level
+    levels = 'auto', 'full-speed'
+    _fan_level = not _fan_level
+    echo level @(levels[_fan_level]) | sudo tee '/proc/acpi/ibm/fan'
+
 aliases['up'] = _upgrade
+aliases['fan'] = _fan_control
