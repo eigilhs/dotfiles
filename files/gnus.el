@@ -1,6 +1,8 @@
 (setq user-mail-address "eigilhs@ifi.uio.no"
       user-full-name "Eigil Skjæveland")
 
+(setq gnus-thread-ignore-subject t)
+
 (require 'nnir)
 (require 'smtpmail)
 
@@ -11,19 +13,96 @@
                (nnimap-stream ssl)
                (nnir-search-engine imap)))
 
-(setq starttls-use-gnutls t
-      starttls-gnutls-program "gnutls-cli"
-      starttls-extra-arguments '("--insecure"))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "skjaeve.land"
+                      (nnimap-address "zx.lc")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "edb"
+                      (nnimap-address "zx.lc")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "zx"
+                      (nnimap-address "zx.lc")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)))
+
+;; (setq starttls-use-gnutls t
+;;       starttls-gnutls-program "gnutls-cli"
+;;       starttls-extra-arguments '("--insecure"))
 
 (setq message-send-mail-function 'smtpmail-send-it
       send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-server "smtp.uio.no"
-      smtpmail-default-smtp-server "smtp.uio.no"
-      smtpmail-smtp-service 587
+      ;; smtpmail-smtp-server "smtp.uio.no"
+      ;; smtpmail-default-smtp-server "smtp.uio.no"
+      ;; smtpmail-smtp-service 587
       smtpmail-debug-verb t
       smtpmail-debug-info t
-      smtpmail-starttls-credentials '(("smtp.uio.no" 587 nil nil))
-      smtpmail-auth-credentials '(("smtp.uio.no" 587 "eigilhs" nil)))
+      ;; smtpmail-starttls-credentials '(("smtp.uio.no" 587 nil nil))
+      ;; smtpmail-auth-credentials '(("smtp.uio.no" 587 "eigilhs" nil))
+      )
+
+(defvar smtp-accounts
+  '((ssl "eigilhs@ifi.uio.no" "smtp.uio.no"
+         587 "eigilhs" nil)
+    (ssl "edb@skjaeve.land" "zx.lc"
+         465 "edb@skjaeve.land" nil)
+    (ssl "eigil@skjaeve.land" "zx.lc"
+         465 "eigil@skjaeve.land" nil)
+    (ssl "e@zx.lc" "zx.lc"
+         465 "e@zx.lc" nil)
+    ))
+
+(defun set-smtp (mech server port user password)
+  "Set related SMTP variables for supplied parameters."
+  (setq smtpmail-smtp-server server smtpmail-smtp-service port
+        smtpmail-auth-credentials (list (list server port user
+                                              password)) smtpmail-auth-supported (list mech)
+                                              smtpmail-starttls-credentials nil)
+  (message "Setting SMTP server to `%s:%s' for user `%s'."
+           server port user))
+
+(defun set-smtp-ssl (address server port user password &optional key
+                            cert)
+  "Set related SMTP and SSL variables for supplied parameters."
+  (setq starttls-use-gnutls t
+        starttls-gnutls-program "gnutls-cli"
+        starttls-extra-arguments '("--insecure")
+        smtpmail-smtp-server server
+        smtpmail-mail-address address
+        user-mail-address address
+        smtpmail-smtp-service port
+        smtpmail-auth-credentials '((server port user nil))
+        smtpmail-starttls-credentials '((server port nil nil)))
+  (message "Setting SMTP server to `%s:%s' for user `%s'. (SSL enabled.)" server port user))
+
+(defun change-smtp ()
+  "Change the SMTP server according to the current from line."
+  (save-excursion
+    (cl-loop with from = (save-restriction
+                           (message-narrow-to-headers)
+                           (message-fetch-field "from"))
+             for (auth-mech address . auth-spec) in smtp-accounts
+             when (string-match address from) do (cond
+                                                  ((memq auth-mech '(cram-md5 plain login))
+                                                   (cl-return (apply 'set-smtp (cons auth-mech auth-spec))))
+                                                  ((eql auth-mech 'ssl)
+                                                   (cl-return (apply 'set-smtp-ssl (cons address auth-spec))))
+                                                  (t (error "Unrecognized SMTP auth. mechanism: `%s'." auth-mech))) finally (error "Cannot infer SMTP information."))))
+
+
+(defvar %smtpmail-via-smtp (symbol-function 'smtpmail-via-smtp))
+
+(defun smtpmail-via-smtp (recipient smtpmail-text-buffer)
+  (with-current-buffer smtpmail-text-buffer
+    (change-smtp))
+  (funcall (symbol-value '%smtpmail-via-smtp) recipient
+           smtpmail-text-buffer))
 
 (setq message-citation-line-function 'message-insert-formatted-citation-line)
 ;(setq message-citation-line-format "On %a, %b %d %Y at %r, %f wrote:")
