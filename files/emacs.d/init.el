@@ -30,7 +30,7 @@
 (menu-bar-mode -1)
 
 (setq-default abbrev-mode t)
-(read-abbrev-file "~/.abbrev_defs")
+(read-abbrev-file "~/.emacs.d/abbrev_defs")
 (setq save-abbrevs t)
 
 ;; ===== Set the highlight current line minor mode =====
@@ -63,15 +63,6 @@
 (global-linum-mode 1)
 (setq linum-format "%d ")
 
-;;(load-theme 'tango-dark t)
-;(require 'color-theme)
-;(color-theme-initialize)
-;(color-theme-billw)
-;;(color-theme-blippblopp)
-
-;;(require 'python-mode)
-;;(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-;;(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
 (autoload 'python-mode "python" nil t)
 
@@ -114,21 +105,12 @@
 (setq fci-rule-column 72)
 
 (add-to-list 'load-path "~/.emacs.d/plugins/")
-;; (require 'ido)
-;; (ido-mode t)
 
-(require 'undoc)
 (require 'package)
 (add-to-list 'package-archives
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (package-initialize)
-;; (smex-initialize)
-;; (global-set-key (kbd "M-x") 'smex)
-;; (global-set-key (kbd "<menu>") 'smex)
-;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is your old M-x.
-;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (load-theme 'monokai t)
 
 (require 'multiple-cursors)
@@ -160,12 +142,10 @@
 
 (set-frame-size-according-to-resolution)
 (global-set-key (kbd "S-<f9>") 'backward-kill-word)
-;; (global-set-key (kbd "<f6>") 'smex)
 (global-set-key "\M-[1;5C" 'forward-word)
 (global-set-key "\M-[1;5D" 'backward-word)
 (global-set-key "\M-[1;5A" 'backward-paragraph)
 (global-set-key "\M-[1;5B" 'forward-paragraph)
-;(global-set-key "\M-H[3~" 'forward-paragraph)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
@@ -187,3 +167,5 @@
   	(error "No message sent")))))
 ;; check is done just before sending the message
 (add-hook 'message-send-hook 'my-message-check-attachment)
+
+(setq inferior-lisp-program (executable-find "sbcl"))
