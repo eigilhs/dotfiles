@@ -1,6 +1,6 @@
 alias 755='chmod 755'
-alias up='sudo apt-get update && sudo apt-get dist-upgrade'
-alias get='sudo apt-get install'
+alias up='sudo apt update && sudo apt full-upgrade'
+alias get='sudo apt install'
 alias ls='ls --color=auto --group-directories-first'
 alias ll='ls -l --color=auto --group-directories-first'
 alias la='ls -A --color=auto --group-directories-first'
