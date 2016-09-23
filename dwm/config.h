@@ -66,7 +66,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
 static const char *webcmd[]  = { "x-www-browser", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
-static const char *lockcmd[]  = { "/usr/bin/xautolock", "-locknow", NULL };
+static const char *lockcmd[]  = { "/bin/loginctl", "lock-session", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
