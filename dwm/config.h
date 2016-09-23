@@ -14,6 +14,11 @@ static const char normfgcolor[]     = "#D8D8D2";
 static const char selbordercolor[]  = "#575852";
 static const char selbgcolor[]      = "#474842";
 static const char selfgcolor[]      = "#F8F8F2";
+static const char *colors[][3]      = {
+	{normfgcolor, normbgcolor, normbordercolor},
+	{selfgcolor,  selbgcolor,  selbordercolor},
+};
+
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
