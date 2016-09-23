@@ -30,22 +30,19 @@ xset -b
 # Fix keyboard layout
 setxkbmap -layout no -option ctrl:nocaps
 
-# Fix colors
-xcalib -d :0 -s 0 -v ~/.color/GCM-LENOVO-6464Y1H\(2010-05-06\).icc
+# Disable touchpad
+xinput set-prop 10 "Device Enabled" 0
+
+# Bind function keys
+xbindkeys -p
 
 # Fix some trackpoint settings
-xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 8 1
-xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 8 2
-xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
-
-# Set up the screens
-xrandr --output LVDS1 --mode 1280x800 --pos 0x0
-# xrandr --output VGA1 --auto --pos 1280x0
+# xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 8 1
+# xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 8 2
+# xinput set-int-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 8 6 7 4 5
 
 # Start screenlocker
-xautolock -time 10 -detectsleep -locker "i3lock -d -u -c 222222" &
+xss-lock slock &
 
-emacs --daemon
 dwmstatus &
-exec ck-launch-session dbus-launch dwm
-
+exec dwm
