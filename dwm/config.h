@@ -64,7 +64,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "x-terminal-emulator", NULL };
-static const char *webcmd[]  = { "x-www-browser", NULL };
+static const char *webcmd[]  = { "chromium", "--enable-remote-extensions", NULL };
 static const char *emacscmd[]  = { "emacs", NULL };
 static const char *lockcmd[]  = { "/bin/loginctl", "lock-session", NULL };
 
