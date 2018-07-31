@@ -96,10 +96,12 @@ fi
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
 export PAGER=most
+export GPG_TTY=$(tty)
 
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 export PATH=~/.rakudobrew/bin:$PATH
+export PATH=~/.npm-global/bin:$PATH
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi

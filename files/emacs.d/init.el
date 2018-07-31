@@ -12,7 +12,7 @@
  '(custom-safe-themes
    (quote
     ("c567c85efdb584afa78a1e45a6ca475f5b55f642dfcd6277050043a568d1ac6f" "3eb93cd9a0da0f3e86b5d932ac0e3b5f0f50de7a0b805d4eb1f67782e9eb67a4" "003a9aa9e4acb50001a006cfde61a6c3012d373c4763b48ceb9d523ceba66829" "73a13a70fd111a6cd47f3d4be2260b1e4b717dbf635a9caee6442c949fad41cd" "228c0559991fb3af427a6fa4f3a3ad51f905e20f481c697c6ca978c5683ebf43" "de0b7245463d92cba3362ec9fe0142f54d2bf929f971a8cdf33c0bf995250bcf" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "7feeed063855b06836e0262f77f5c6d3f415159a98a9676d549bfeb6c49637c4" "ecb9fe1d5b165a35499191a909b2b5710a52935614058b327a39bfbbb07c7dc8" "c1fb68aa00235766461c7e31ecfc759aa2dd905899ae6d95097061faeb72f9ee" "357d5abe6f693f2875bb3113f5c031b7031f21717e8078f90d9d9bc3a14bcbd8" "0f97285f9e0c7d9cad04f2130859d20d6c9b3142877b2bca52d958f4f1cf346f" "d6e27431f8cafb4a9136aebb1d4061f895b120bf88d34ff60c390d9905bd4e36" "57f8801351e8b7677923c9fe547f7e19f38c99b80d68c34da6fa9b94dc6d3297" "97a2b10275e3e5c67f46ddaac0ec7969aeb35068c03ec4157cf4887c401e74b1" "0e121ff9bef6937edad8dfcff7d88ac9219b5b4f1570fd1702e546a80dba0832" "941bc214a26ed295e68bbeaadcd279475a3d6df06ae36b0b2872319d58b855f7" default)))
- '(fci-rule-color "#3C3D37")
+ '(fci-rule-color "#3C3D37" t)
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-tail-colors
@@ -32,9 +32,9 @@
     ("#183691" "#969896" "#a71d5d" "#969896" "#0086b3" "#795da3" "#a71d5d" "#969896")))
  '(package-selected-packages
    (quote
-    (graphviz-dot-mode latex-extra outline-magic web-mode tango-plus-theme slime slack rust-mode perl6-mode pdf-tools nim-mode nhexl-mode multiple-cursors monokai-theme markdown-mode magit hemisu-theme github-theme fill-column-indicator espresso-theme dart-mode d-mode cypher-mode color-theme-sanityinc-tomorrow clojure-mode base16-theme airline-themes)))
+    (ponylang-mode scala-mode go-mode emr graphviz-dot-mode latex-extra outline-magic web-mode tango-plus-theme slime slack rust-mode perl6-mode pdf-tools nim-mode nhexl-mode multiple-cursors monokai-theme markdown-mode magit hemisu-theme github-theme fill-column-indicator espresso-theme dart-mode d-mode cypher-mode color-theme-sanityinc-tomorrow clojure-mode base16-theme airline-themes)))
  '(pdf-view-midnight-colors (quote ("#969896" . "#f8eec7")))
- '(pos-tip-background-color "#A6E22E")
+ '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
@@ -219,19 +219,6 @@
 (add-hook 'message-send-hook 'my-message-check-attachment)
 
 (setq inferior-lisp-program (executable-find "sbcl"))
-
-
-(setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-(setq slack-prefer-current-team t)
-(slack-register-team
-   :name "Khoarrupsjon"
-   :default t
-   :client-id "71016528597.103407209491"
-   :client-secret "6868e4622ecc58585056a315defed0a4"
-   :token "xoxp-71016528597-71021940209-102800470545-f1826ca1b031f0ad85c72cc7eb493b13"
-   :subscribed-channels '(swag))
-
-(load "~/.emacs.d/mutt.el")
 
 ;; (add-hook 'mail-mode-hook          'turn-on-auto-fill)
 ;; (add-hook 'mail-mode-hook          'mail-abbrevs-setup)
