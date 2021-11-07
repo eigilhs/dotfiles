@@ -1,0 +1,46 @@
+case "$-" in
+    *i*) ;;
+    *) return 0 ;;
+esac
+
+export EDITOR='emacs -nw'
+export FCEDIT=$EDITOR
+export PAGER=less
+export LESS='-iMRS -x2'
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export CLICOLOR=1
+
+HISTFILE=$HOME/.ksh_history
+HISTSIZE=20000
+HISTCONTROL=ignoredups
+
+set -o emacs
+
+if command -v colorls >/dev/null ; then
+    export LSCOLORS=ExGxcxdxCxegDaabagacad
+    LS='colorls'
+else
+    LS='ls'
+fi
+
+alias ls="$LS -h"
+alias ll='ls -l'
+alias la='ls -lA'
+
+_XTERM_TITLE='\[\033]0;\u@\h:\w\007\]'
+case "$(id -u)" in
+    0) _PS1_ROOT='\[\033[1;31m\]root\[\033[0m\] ' ;;
+esac
+PS1='$_XTERM_TITLE$_PS1_ROOT\A $? \w \$ '
+
+set -A complete_sysctl -- $(sysctl | grep = | cut -d= -f1)
+
+if command -v git >/dev/null ; then
+    set -A complete_git_1 -- $(git --list-cmds=main)
+fi
+
+PWD_STORE=$HOME/.password-store
+if [ -d $PWD_STORE ] ; then
+    set -A complete_pass -- $(cd $PWD_STORE; find * -type f | sed s/\.gpg$//)
+fi
