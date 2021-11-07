@@ -1,9 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-rm -f files/*~
-for DOTFILE in $(find files -type f)
+SCRIPTDIR=$(cd "$(dirname "$0")" && pwd)
+
+for dotfile in $(find "$SCRIPTDIR/files" -type f)
 do
-    ([ -e ~/.${DOTFILE#files/} ] || install -D /dev/null ~/.${DOTFILE#files/}) &&
-        ln -sb $PWD/$DOTFILE ~/.${DOTFILE#files/} &&
-        echo "Created link ~/.${DOTFILE#files/} -> $PWD/$DOTFILE"
+    target=~/.${dotfile##*files/}
+    [ ! -e $target ] &&
+	mkdir -p $(dirname $target) &&
+        ln -s $dotfile $target &&
+        echo "Created link $target -> $dotfile" || echo "$target already exists"
 done
