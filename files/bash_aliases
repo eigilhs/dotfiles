@@ -1,0 +1,16 @@
+hours() { dc <<< "2k$((`date +%s`-`date +%s -d$1`-$2*60)) 3600/p"; }
+deb-audit() {
+    join --nocheck-order \
+        <(curl -s https://security-tracker.debian.org/tracker/data/json | jq -r '
+            . as $x | path(.[] | .[].releases.'`lsb_release -cs`'
+                | select(.status | . != null and . != "resolved")
+            ) as $p | $p[:2] + [$x | getpath($p).urgency] | @tsv' | sort) \
+        <(dpkg-query -W -f='${Package} ${db:Status-Status}\n' | grep 'installed$' | sort) \
+        | awk '{NF-=1;print}' | grep -E '|high'
+}
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias cv='cd /home/eigil/dev/vaam'
+alias ncal='ncal -M'

@@ -30,3 +30,20 @@
   '("melpa" . "https://melpa.org/packages/") t)
 
 (load custom-file :noerror)
+
+(require 'lsp-mode)
+(define-derived-mode bicep-mode
+  js-mode "Bicep"
+  "Major mode for bicep."
+  (setq js-indent-level 2)
+  (setq lsp-semantic-tokens-enable t)
+  (lsp))
+(add-to-list 'auto-mode-alist '("\\.bicep\\'" . bicep-mode))
+(add-to-list 'lsp-language-id-configuration '(bicep-mode . "bicep"))
+(lsp-register-client
+ (make-lsp-client
+  :new-connection (lsp-stdio-connection '("dotnet"
+                                          "/home/eigil/.local/share/bicep-langserver/Bicep.LangServer.dll"))
+  :activation-fn (lsp-activate-on "bicep")
+  :priority -1
+  :server-id 'bicep-ls))

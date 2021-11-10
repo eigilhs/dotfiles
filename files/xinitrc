@@ -31,7 +31,7 @@ xset -b
 setxkbmap -layout no -option ctrl:nocaps
 
 # Disable touchpad
-xinput set-prop 10 "Device Enabled" 0
+xinput set-prop 16 "Device Enabled" 0
 
 # Bind function keys
 xbindkeys -p
