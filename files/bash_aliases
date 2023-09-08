@@ -6,7 +6,13 @@ deb-audit() {
                 | select(.status | . != null and . != "resolved")
             ) as $p | $p[:2] + [$x | getpath($p).urgency] | @tsv' | sort) \
         <(dpkg-query -W -f='${Package} ${db:Status-Status}\n' | grep 'installed$' | sort) \
-        | awk '{NF-=1;print}' | grep -E '|high'
+        | awk '{NF-=1;printf("%-30s %-25s %s\n", $1, $2, substr($0,length($1$2)+2))}' \
+        | grep --color=always -E '|high$'
+}
+gitlocal() {
+    comm -23 --nocheck-order \
+        <(git branch --format='%(refname:lstrip=2)' | sort) \
+        <(git branch -r --format='%(refname:lstrip=3)' | sort)
 }
 
 alias grep='grep --color=auto'
@@ -15,3 +21,4 @@ alias egrep='egrep --color=auto'
 alias cv='cd /home/eigil/dev/vaam'
 alias ct='cd /home/eigil/dev/transaction-monitoring'
 alias ncal='ncal -M'
+alias ls='ls --color=always'
