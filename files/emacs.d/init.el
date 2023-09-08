@@ -3,7 +3,7 @@
   (scroll-bar-mode -1)
   (tooltip-mode -1)
   (tool-bar-mode -1)
-  (global-linum-mode 1)
+  (display-line-numbers-mode 1)
   (setq linum-format "%d "
 	frame-title-format (list "%b %f")))
 
