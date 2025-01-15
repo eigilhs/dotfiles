@@ -1,0 +1,22 @@
+hours() { dc <<< "2k$((`date +%s`-`date +%s -d$1`-$2*60)) 3600/p"; }
+deb-audit() {
+    join --nocheck-order \
+        <(curl -s https://security-tracker.debian.org/tracker/data/json | jq -r '
+            . as $x | path(.[] | .[].releases.'`lsb_release -cs`'
+                | select(.status | . != null and . != "resolved")
+            ) as $p | $p[:2] + [$x | getpath($p).urgency] | @tsv' | sort) \
+        <(dpkg-query -W -f='${Package} ${db:Status-Status}\n' | grep 'installed$' | sort) \
+        | awk '{NF-=1;printf("%-30s %-25s %s\n", $1, $2, substr($0,length($1$2)+2))}' \
+        | grep --color=always -E '|high$'
+}
+gitlocal() {
+    comm -23 --nocheck-order \
+        <(git branch --format='%(refname:lstrip=2)' | sort) \
+        <(git branch -r --format='%(refname:lstrip=3)' | sort)
+}
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ncal='ncal -M'
+alias ls='ls --color=always'
