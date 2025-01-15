@@ -91,7 +91,6 @@ fi
 
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -t"
-export PAGER=most
 export GPG_TTY=$(tty)
 export GOPATH=$HOME/dev/go
 export GOPRIVATE=github.com/vippsas/*
