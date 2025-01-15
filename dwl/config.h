@@ -122,6 +122,7 @@ static const char *termcmd[]     = { "foot", NULL };
 static const char *browsercmd[]  = { "firefox", NULL };
 static const char *menucmd[]     = { "wmenu-run", NULL };
 static const char *lockcmd[]     = { "waylock", NULL };
+static const char *emacscmd[]    = { "emacs", NULL };
 static const char *bright_up[]   = { "/usr/bin/brightnessctl", "set", "5%+", NULL };
 static const char *bright_down[] = { "/usr/bin/brightnessctl", "set", "5%-", NULL };
 
@@ -130,6 +131,7 @@ static const Key keys[] = {
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = browsercmd} },
+	{ MODKEY,                    XKB_KEY_e,          spawn,          {.v = emacscmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_L,          spawn,          {.v = lockcmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ 0,                         XKB_KEY_XF86MonBrightnessUp,   spawn, {.v = bright_up} },
