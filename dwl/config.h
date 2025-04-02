@@ -26,6 +26,7 @@ static const Rule rules[] = {
 	/* examples: */
 	{ "Gimp",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "firefox",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
+	{ "slack",    NULL,       1 << 7,       0,           -1 }, /* Start on ONLY tag "8" */
 };
 
 /* layout(s) */
@@ -123,6 +124,7 @@ static const char *browsercmd[]  = { "firefox", NULL };
 static const char *menucmd[]     = { "wmenu-run", NULL };
 static const char *lockcmd[]     = { "waylock", NULL };
 static const char *emacscmd[]    = { "emacs", NULL };
+static const char *slackcmd[]    = { "slack", "--enable-features=UseOzonePlatform", "--ozone-platform=wayland", NULL };
 static const char *bright_up[]   = { "/usr/bin/brightnessctl", "set", "5%+", NULL };
 static const char *bright_down[] = { "/usr/bin/brightnessctl", "set", "5%-", NULL };
 
@@ -132,6 +134,7 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY,                    XKB_KEY_w,          spawn,          {.v = browsercmd} },
 	{ MODKEY,                    XKB_KEY_e,          spawn,          {.v = emacscmd} },
+	{ MODKEY,                    XKB_KEY_s,          spawn,          {.v = slackcmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_L,          spawn,          {.v = lockcmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
 	{ 0,                         XKB_KEY_XF86MonBrightnessUp,   spawn, {.v = bright_up} },
